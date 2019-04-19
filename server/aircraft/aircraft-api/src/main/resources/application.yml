@@ -1,0 +1,32 @@
+server:
+  port: 8620
+  context-path: /toujiao-websocket
+  tomcat:
+    max-threads: 400  
+    uri-encoding: UTF-8
+  
+spring:
+  application:
+    name: prog-api
+  rocketmq:
+    name-server: 172.16.130.24:9876
+    producer:
+      group: my-group
+      retry-times-when-send-async-failed: 0
+      send-msg-timeout: 300000
+      compress-msg-body-over-howmuch: 4096
+      max-message-size: 4194304
+      retry-another-broker-when-not-store-ok: false
+      retry-times-when-send-failed: 2
+  
+management:
+  context-path: /monitoring
+  
+errdog:
+  sender: com.fungame.core.monitor.errdog.QywxMessageSender
+  qywx:
+    corpid: ww19c8e5a655445c38
+    corpsecret: AFFa1_VGwAz2cY1EC3kgcaXTVTiOBSPi7yvTmEBDrAk
+    agentid: 1000002
+    touser: LinBingZhong|WangCheng
+    tag: aircraft

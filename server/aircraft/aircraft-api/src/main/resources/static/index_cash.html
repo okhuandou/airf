@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="blank">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<title>红包领取</title>
+<!-- Bootstrap core -->
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link href="https://v3.bootcss.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet"></link>
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<script src="https://v3.bootcss.com/assets/js/ie-emulation-modes-warning.js"></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]--> 
+<link href="css/pay.css?v=1706230739" rel="stylesheet"></link>
+<link href="css/signin.css?v=1706100630" rel="stylesheet"></link>
+<script src="js/vconsole.min.js"></script>
+</head>
+<body>
+<div class="container">
+	<form class="form-signin">
+		<label>红包领取：</label>
+		<span id="myCommisAmount" style="color: red;" value=""></span>
+		<br/>
+		<label for="num" class="sr-only">提取额度</label>
+		<div class="alert alert-success">请在游戏端获取红包兑换码</div>
+		<input type="text" id="num" class="form-control" placeholder="请输入红包兑换码" required/><br/>
+    	<button class="btn btn-lg btn-success btn-primary btn-block" type="button" id="chargeCash">兑换</button>
+	  	<div id="myAlert" class="alert alert-success">
+			<span id="tip"></span>
+	    </div>
+	</form>
+</div>
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+function getQueryString(name){
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	var r = window.location.search.substr(1).match(reg);
+	if (r != null) return decodeURI(r[2]); return null;
+}
+function doChargeCash(code) {
+	if( ! code) {
+		$("#tip").text("请输入兑换码!");
+		$("#myAlert").show();
+		return;
+	}
+	submitBtnAttrDisabled();
+	var token = getQueryString("token");
+	var url = "/wxuser/cash/charge";
+	$.ajax({
+		type:"POST",
+		url:url,//路径
+		data:JSON.stringify({
+			code:code
+		}),
+		headers:{
+			Authorization: token,
+			Accept: "application/json; charset=utf-8"
+		},
+		contentType: "application/json",
+		dataType:"json",//返回json格式的数据
+		success:function(result) {//返回数据根据结果进行相应的处理
+			if ( result.code == 0 ) {
+				$("#tip").text("成功提现 "+result.data.amout+" 元，请到公众号领取红包！");
+			}
+			else {
+				$("#tip").text(result.msg);
+				submitBtnAttrOk();
+			}
+			$("#myAlert").show();
+		}  
+	});
+}
+$('#num').bind('input propertychange',function(){
+	//$("#myAlert").hide();
+	submitBtnAttrOk();
+});
+$('#chargeCash').click(function () {
+	//$("#tip").text("提现尚未开放,敬请期待！");
+	//$("#myAlert").show();
+	doChargeCash($("#num").val());
+});
+function submitBtnAttrOk() {
+	$('#chargeCash').removeAttr('disabled').removeClass('default').addClass('btn-primary');
+}
+function submitBtnAttrDisabled() {
+	$("#chargeCash").attr('disabled', 'disabled').addClass('default').removeClass('btn-primary');
+}
+$(document).ready(function () {
+	$("#myAlert").hide();
+});
+</script>
+</body>
+</html>

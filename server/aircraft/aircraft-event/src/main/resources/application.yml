@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: aircraft-event
+  rocketmq:
+    name-server: 172.16.130.24:9876
+  
+management:
+  context-path: /monitoring
+
+errdog:
+  sender: com.fungame.core.monitor.errdog.QywxMessageSender
+  qywx:
+    corpid: ww19c8e5a655445c38
+    corpsecret: AFFa1_VGwAz2cY1EC3kgcaXTVTiOBSPi7yvTmEBDrAk
+    agentid: 1000002
+    touser: LinBingZhong|WangCheng
+    tag: aircraft

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 配置文件 -->
+    <bean id="configProperties"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:/config-*.properties</value>
+            </list>
+        </property>
+    </bean>
+	<bean id="default.poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    	<property name="minIdle" value="${default.redis.minIdle}" />
+        <property name="maxIdle" value="${default.redis.maxIdle}" />
+        <property name="maxTotal" value="${default.redis.maxTotal}" />
+        <property name="maxWaitMillis" value="${default.redis.maxWaitMillis}" />
+        <property name="minEvictableIdleTimeMillis" value="${default.redis.minEvictableIdleTimeMillis}" />
+        <property name="testOnBorrow" value="${default.redis.testOnBorrow}" />
+    </bean>
+    <bean id="default.jedisPool" class="com.fungame.core.cache.JedisPoolWriper" 
+    	destroy-method="close" depends-on="default.poolConfig">
+    	<constructor-arg index="0" ref="default.poolConfig"/>
+      	<constructor-arg index="1" value="${default.redis.host}" type="java.lang.String"/>
+      	<constructor-arg index="2" value="${default.redis.port}" type="int"/>
+      	<constructor-arg index="3" value="${default.redis.timeout}" type="int"/>
+      	<constructor-arg index="4" value="${default.redis.password}" type="java.lang.String"/>
+        <constructor-arg index="5" value="${default.redis.database}" type="int"/>
+    </bean>
+	<bean id="default.codec" class="com.fungame.core.cache.codec.JsonCodec"></bean>
+	
+	<bean id="default.cache" class="com.fungame.core.cache.JedisCache">
+		<property name="name" value="default"/>
+		<property name="codec" ref="default.codec" />
+		<property name="jedisPool" ref="default.jedisPool"></property>
+	</bean>
+	
+	<bean id="jedisCacheManager" class="com.fungame.core.cache.JedisCacheManager">
+		<property name="caches">
+			<set>
+				<ref bean="default.cache"/>
+			</set>
+		</property>
+	</bean>
+</beans>

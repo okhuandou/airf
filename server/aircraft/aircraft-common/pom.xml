@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.fungame</groupId>
+		<artifactId>aircraft</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>aircraft-common</artifactId>
+	<name>aircraft-common</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<!-- 编译 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<!-- 插件 -->
+		<plugin.compiler.version>3.0</plugin.compiler.version>
+		<plugin.resources.version>2.7</plugin.resources.version>
+		<msgpack.version>0.8.6</msgpack.version>
+		<jedis.version>2.8.1</jedis.version>
+		<joda-time.version>2.9.1</joda-time.version>
+		<guava.version>19.0</guava.version>
+		<commons-lang3.version>3.4</commons-lang3.version>
+		<fastjson.version>1.2.9</fastjson.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.msgpack</groupId>
+			<artifactId>msgpack-core</artifactId>
+			<version>${msgpack.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.msgpack</groupId>
+			<artifactId>jackson-dataformat-msgpack</artifactId>
+			<version>${msgpack.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.8.1</version>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda-time.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+		
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+        </dependency>
+		<dependency>
+	        <groupId>org.apache.rocketmq</groupId>
+	        <artifactId>rocketmq-client</artifactId>
+	        <version>4.4.0</version>
+	    </dependency>
+		
+	    <dependency>
+	        <groupId>io.dropwizard.metrics</groupId>
+	        <artifactId>metrics-core</artifactId>
+	        <version>3.2.6</version>
+	    </dependency>
+	</dependencies>
+</project>

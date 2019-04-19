@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+   
+	<!-- 配置文件 -->
+    <bean id="configProperties"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:/config-*.properties</value>
+            </list>
+        </property>
+    </bean>
+	<!-- 驱动与连接池 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver-class-name}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+		
+        <property name="filters" value="${jdbc.filters}"/>
+        <property name="initialSize" value="${jdbc.initialSize}"/>
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+        <property name="maxWait" value="${jdbc.maxWait}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
+        <property name="validationQuery" value="SELECT 'x'"/>
+        <property name="testWhileIdle" value="${jdbc.testWhileIdle}"/>
+        <property name="testOnBorrow" value="${jdbc.testOnBorrow}"/>
+        <property name="testOnReturn" value="${jdbc.testOnReturn}"/>
+        <property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}"/>
+        <property name="poolPreparedStatements" value="${jdbc.poolPreparedStatements}"/>
+        <property name="connectionProperties" value="${jdbc.connectionProperties}"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${jdbc.maxPoolPreparedStatementPerConnectionSize}"/>
+    </bean>
+    
+	<!-- 事务管理 -->
+    <aop:aspectj-autoproxy/>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+	         <tx:method name="insert*"	propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="java.lang.Exception"/>
+	         <tx:method name="add*"		propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="java.lang.Exception"/> 
+	         <tx:method name="delete*"	propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="java.lang.Exception"/>
+	         <tx:method name="update*"  propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="java.lang.Exception"/> 
+	         
+	         <tx:method name="get*"		propagation="SUPPORTS" read-only="true"/>
+	         <tx:method name="query*"	propagation="SUPPORTS" read-only="true"/>
+	         <tx:method name="search*"	propagation="SUPPORTS" read-only="true"/>
+	         <tx:method name="find*"	propagation="SUPPORTS" read-only="true"/>
+	         <tx:method name="select*"	propagation="SUPPORTS" read-only="true"/>
+	         
+	         <tx:method name="*" propagation="REQUIRED" isolation="READ_COMMITTED" rollback-for="java.lang.Exception"/> 
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="appService" expression="execution(* com.fungame..service..*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="appService"/>
+    </aop:config>
+</beans>
