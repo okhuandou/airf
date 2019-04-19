@@ -1,0 +1,79 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "enemy_die_boss",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.7666666666666667,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": "2",
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "92b1278e-71e5-401c-b26f-4cf0e857f7b3"
+            }
+          },
+          {
+            "frame": 0.03333333333333333,
+            "value": {
+              "__uuid__": "14840679-8124-434a-9ddf-c694affe2e8a"
+            }
+          },
+          {
+            "frame": 0.05,
+            "value": {
+              "__uuid__": "c82d24f6-c2d2-4f98-aaf3-22b93d487d84"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "79765f45-65f1-47ab-8bf2-32dd86d96d03"
+            }
+          },
+          {
+            "frame": 0.15,
+            "value": {
+              "__uuid__": "28fcc4b7-6c34-414b-8010-3070d8887bb4"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "c02c1ef6-96e7-4c37-8bb3-5ec87756cb7c"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "35eeb529-084c-4b09-99b2-43507eb24121"
+            }
+          },
+          {
+            "frame": 0.3,
+            "value": {
+              "__uuid__": "14840679-8124-434a-9ddf-c694affe2e8a"
+            }
+          },
+          {
+            "frame": 0.35,
+            "value": {
+              "__uuid__": "119b17ed-40e0-497d-a4d7-b808d7684584"
+            }
+          },
+          {
+            "frame": 0.75,
+            "value": {
+              "__uuid__": "92b1278e-71e5-401c-b26f-4cf0e857f7b3"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

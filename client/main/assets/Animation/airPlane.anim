@@ -1,0 +1,117 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "airPlane",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.6833333333333333,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": "2",
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "8ebfc2fe-86aa-4fc3-b4c9-be71b714f568"
+            }
+          },
+          {
+            "frame": 0.08333333333333333,
+            "value": {
+              "__uuid__": "1713ccb9-f01f-41ce-b942-1518c0820e18"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "ce6a459b-0084-47ba-8b62-07484e9a8479"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "ccca6115-05ec-4497-b873-cb61402a1a06"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "4a39cc05-6117-4d53-a897-1b63262c5fc9"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "a52af3e2-1f11-4d9e-88de-7e52a3f76745"
+            }
+          },
+          {
+            "frame": 0.4166666666666667,
+            "value": {
+              "__uuid__": "43b57e47-0ec6-4f68-8d83-7c7a0142342d"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "ce6a459b-0084-47ba-8b62-07484e9a8479"
+            }
+          },
+          {
+            "frame": 0.5833333333333334,
+            "value": {
+              "__uuid__": "5c6921c9-5c16-4253-aafc-cf7ffba1e669"
+            }
+          },
+          {
+            "frame": 0.6666666666666666,
+            "value": {
+              "__uuid__": "f1c91a64-1347-4219-8677-5a023a8831c2"
+            }
+          }
+        ]
+      }
+    },
+    "props": {
+      "rotation": [
+        {
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "frame": 0.08333333333333333,
+          "value": 0
+        },
+        {
+          "frame": 0.16666666666666666,
+          "value": 0
+        },
+        {
+          "frame": 0.2,
+          "value": -90
+        },
+        {
+          "frame": 0.25,
+          "value": -90
+        },
+        {
+          "frame": 0.6666666666666666,
+          "value": -90
+        }
+      ],
+      "scale": [
+        {
+          "frame": 0,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1.5,
+            "y": 1.5
+          }
+        }
+      ]
+    }
+  },
+  "events": []
+}

@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "509b9853-c983-4cca-96ca-7fb6eb261ed6",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "zanting_kanshipin": {
+      "ver": "1.0.3",
+      "uuid": "0555462c-f524-4cf4-983b-093f14869185",
+      "rawTextureUuid": "509b9853-c983-4cca-96ca-7fb6eb261ed6",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 287,
+      "height": 66,
+      "rawWidth": 287,
+      "rawHeight": 66,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

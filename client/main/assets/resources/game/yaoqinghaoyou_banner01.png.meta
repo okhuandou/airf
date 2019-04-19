@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "94e8236c-9416-4a6a-9596-c1c04a652b48",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "yaoqinghaoyou_banner01": {
+      "ver": "1.0.3",
+      "uuid": "902e5955-0a27-474e-b807-ee92c3ac3529",
+      "rawTextureUuid": "94e8236c-9416-4a6a-9596-c1c04a652b48",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 630,
+      "height": 195,
+      "rawWidth": 630,
+      "rawHeight": 195,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

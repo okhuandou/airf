@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "d066bdb6-8a4d-43a9-90b1-c3d87540b019",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "denglu_logo ": {
+      "ver": "1.0.3",
+      "uuid": "641108f8-f461-416a-8253-eb8441da6ca0",
+      "rawTextureUuid": "d066bdb6-8a4d-43a9-90b1-c3d87540b019",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 668,
+      "height": 395,
+      "rawWidth": 668,
+      "rawHeight": 395,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
