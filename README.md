@@ -5,3 +5,7 @@ git add README.md
 git commit -m "first commit"
 git remote add origin https://github.com/okhuandou/airf.git
 git push -u origin master
+
+
+git pull 更新
+git log 查看提交记录
