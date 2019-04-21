@@ -42,7 +42,6 @@ cc.Class({
         btn_chuzhan_arrow_right: cc.Sprite,
         btn_chuzhan_arrow_left: cc.Sprite,
         nodeGuide: cc.Node,
-        btnMoreGame2: cc.Button,
         // labMoreGameRedpoint: cc.Label,
         btn_txt_chuzhan:cc.Sprite,
         btn_txt_5000gm:cc.Sprite,
@@ -55,7 +54,6 @@ cc.Class({
 
         btn_video: cc.Button,
         btn_share: cc.Button,
-        btn_moregame_menu: cc.Button,
         lotteryDrawPrefab: cc.Prefab,
         lotteryRed: cc.Sprite,
         btn_newgifts: cc.Button,
@@ -248,10 +246,6 @@ cc.Class({
             this.shareRedPointNode.active = false;
         }
 
-        if(!D.SvrCfgs.nav2 || D.SvrCfgs.nav2.length == 0){
-            this.btn_moregame_menu.node.active = false;
-        }
-
         this.replayBackgroupMusic();
 
         this.initShareAndVideo();
@@ -259,8 +253,7 @@ cc.Class({
         this.initkSign();
         this.initUpgrade();
         this.initLotteryRed();
-        this.initNewGifts();
-        this.initMoreGame2();
+        // this.initNewGifts();
         this.initRedpacket();
         // platformUtils.setItemByLocalStorage('TodayWxVideoCnt', 0);
     },
@@ -419,45 +412,6 @@ cc.Class({
         });
     },
 
-    initMoreGame2: function(){
-        if(!D.SvrCfgs.cgnav || D.SvrCfgs.cgnav.length == 0){
-            this.btnMoreGame2.node.active = false;
-            return
-        }
-
-        let _this = this;
-        // let moreGameIcon = function(){
-        //     let url = "moregame/moregame_icon_"+_this.btnMoreGame2.icon;
-        //     cc.loader.loadRes(url,cc.SpriteFrame,function(err,spriteFrame){
-        //         _this.btnMoreGame2.getComponent(cc.Sprite).spriteFrame = spriteFrame;
-        //     });
-        // }
-        let moreGameIcon = function(){
-            let url = D.moreGameBaseUrl + "icon2/icon"+_this.btnMoreGame2.icon+".png";
-            cc.loader.load(url, function(err, texture){
-                _this.btnMoreGame2.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
-            });
-        }
-
-        let updateMoregame = function(){
-            _this.btnMoreGame2.count += 1;
-            if(_this.btnMoreGame2.count%2 == 0){
-                _this.btnMoreGame2.icon += 1;
-                if(_this.btnMoreGame2.icon > D.SvrCfgs.cgnav.length ){
-                    _this.btnMoreGame2.icon = 1;
-                }
-                // console.log("============= updateMoregame, icon= "+_this.btnMoreGame2.icon);
-                moreGameIcon();
-            }
-        }
-
-        _this.btnMoreGame2.node.active = true;
-        _this.btnMoreGame2.node.rotation = 0;
-        _this.btnMoreGame2.count = 0;
-        _this.btnMoreGame2.icon = 1;
-        moreGameIcon();
-        _this.btnMoreGame2.node.runAction(cc.repeatForever(cc.sequence(cc.repeat(cc.sequence(cc.rotateBy(0.3, 15), cc.rotateBy(0.3, -15)),2),cc.delayTime(1.5),cc.callFunc(updateMoregame,_this) ) ) );
-    },
    
     touchEnd: function (event) {
         console.log("touchEnd");
@@ -1222,7 +1176,6 @@ cc.Class({
 
         if(CC_WECHATGAME) {
             wx.offHide();//需要取消关闭小程序的事件，否则跳转小程序会被全部关掉
-            let appId = getAppKey(this.btnMoreGame2.icon);
             let path = common.getMoreGamePath(appId);
             console.log("============= onMoreGame2, appId=,path=",appId,path);
             wx.navigateToMiniProgram({
@@ -1238,9 +1191,7 @@ cc.Class({
                 complete: function(res) {
                     console.log('navigateToMiniProgram', res);
                 },
-            }); 
-
-            this.btnMoreGame2.node.getChildByName("spr_red_point").active = false;           
+            });       
         }
     },
 
@@ -1395,84 +1346,6 @@ cc.Class({
         platformUtils.createBannerAd(); 
     },
 
-    onMoregameMenu: function(){
-
-        if(this.btn_moregame_menu.opening){
-            return;
-        }
-        this.onBtnSound();
-
-        let _this = this;
-        let btnFinish = function(){
-            _this.btn_moregame_menu.opening = false;
-            let scaleX = _this.btn_moregame_menu.node.x > 0 ? -1 : 1;
-
-            let spr_arrow = _this.btn_moregame_menu.node.getChildByName("spr_arrow");
-            if(spr_arrow){
-                spr_arrow.scaleX = scaleX;
-            }
-        }
-        let layerFinish = function(node){
-            if(!node) return;
-
-            let script = node.getComponent("moreGame");
-            if(_this.btn_moregame_menu.node.x < 0 ){
-                node.active = false;
-            }else{
-                if(script){
-                    script.setGraphicsVisible(true);
-                }
-            }
-        }
-
-        let anim = function(nodeMoregame){
-            _this.btn_moregame_menu.node.stopAllActions();
-            nodeMoregame.stopAllActions();
-
-            let toX = _this.btn_moregame_menu.node.x < 0 ? 490 : -490;
-            let act1 = cc.moveBy(0.45,cc.v2(toX,0));
-            let act2 = cc.callFunc(btnFinish,_this);
-            let act3 = cc.moveBy(0.45,cc.v2(toX,0));
-            let act4 = cc.callFunc(layerFinish,_this);
-
-            _this.btn_moregame_menu.node.runAction(cc.sequence(act1,act2));
-            nodeMoregame.runAction(cc.sequence(act3,act4));
-
-            if(_this.btn_moregame_menu.node.x > 0 ){
-                let script = nodeMoregame.getComponent("moreGame");
-                if(script){
-                    script.setGraphicsVisible(false);
-                }
-            }
-        }
-
-        let mgLayer = this.node.getChildByName("moregameTag");
-        if(mgLayer){
-            mgLayer.active = true;
-            anim(mgLayer);
-            this.btn_moregame_menu.opening = true;
-            return;
-        }
-
-        cc.loader.loadRes("prefabs/moreGame", function(err, prefab){
-            if(!_this.node.getChildByName("moregameTag")){
-                let layer = cc.instantiate(prefab);
-                _this.node.addChild(layer);
-                layer.x = -490;
-                layer.name = "moregameTag";
-                layer.zIndex = 1000;
-                _this.btn_moregame_menu.node.zIndex = 1001;
-
-                anim(layer);
-                _this.btn_moregame_menu.opening = true;
-                let spr_red = _this.btn_moregame_menu.node.getChildByName("spr_red");
-                if(spr_red){
-                    spr_red.active = false;
-                }
-            }
-            
-        });
-    },
     
     onBtnNewgifts: function(){
         this.onBtnSound();

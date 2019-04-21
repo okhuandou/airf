@@ -17,12 +17,9 @@ cc.Class({
         },
         txt_desc: cc.Label,
         txt_load: cc.Label,
-        progressBar: cc.ProgressBar,
-        btn_moregame_menu: cc.Button,
     },
 
     onLoad:function() {
-        this.btn_moregame_menu.node.active = false;
         D.curSceneName = "Login"
         platformUtils.init(
             function() {
@@ -80,7 +77,6 @@ cc.Class({
                 precent = Math.floor(precent);
 
                 _this.txt_load.string = precent + "%";
-                _this.progressBar.progress = precent/100;
             }
             ,function () {
 
@@ -98,7 +94,6 @@ cc.Class({
         
         this.txt_desc.node.active = false;
         this.txt_load.node.active = false;
-        this.progressBar.node.active = false;
 
         let _this = this;
 
@@ -148,11 +143,7 @@ cc.Class({
         physicsManager.update(0.2);
         physicsManager.enabled = false;
 
-        this.scheduleOnce(function(){
-            if(D.SvrCfgs.nav2 && D.SvrCfgs.nav2.length > 0){
-                _this.btn_moregame_menu.node.active = true;
-            }
-        }, 0.1);
+      
         if (!CC_WECHATGAME) {
                 _this.gotoLogin();
          }
@@ -174,83 +165,5 @@ cc.Class({
         });
     },
 
-    onMoregameMenu: function(){
-
-        if(this.btn_moregame_menu.opening){
-            return;
-        }
-        // this.onBtnSound();
-
-        let _this = this;
-        let btnFinish = function(){
-            _this.btn_moregame_menu.opening = false;
-            let scaleX = _this.btn_moregame_menu.node.x > 0 ? -1 : 1;
-
-            let spr_arrow = _this.btn_moregame_menu.node.getChildByName("spr_arrow");
-            if(spr_arrow){
-                spr_arrow.scaleX = scaleX;
-            }
-        }
-        let layerFinish = function(node){
-            if(!node) return;
-
-            let script = node.getComponent("moreGame");
-            if(_this.btn_moregame_menu.node.x < 0 ){
-                node.active = false;
-            }else{
-                if(script){
-                    script.setGraphicsVisible(true);
-                }
-            }
-        }
-
-        let anim = function(nodeMoregame){
-            _this.btn_moregame_menu.node.stopAllActions();
-            nodeMoregame.stopAllActions();
-
-            let toX = _this.btn_moregame_menu.node.x < 0 ? 490 : -490;
-            let act1 = cc.moveBy(0.45,cc.v2(toX,0));
-            let act2 = cc.callFunc(btnFinish,_this);
-            let act3 = cc.moveBy(0.45,cc.v2(toX,0));
-            let act4 = cc.callFunc(layerFinish,_this);
-
-            _this.btn_moregame_menu.node.runAction(cc.sequence(act1,act2));
-            nodeMoregame.runAction(cc.sequence(act3,act4));
-
-            if(_this.btn_moregame_menu.node.x > 0 ){
-                let script = nodeMoregame.getComponent("moreGame");
-                if(script){
-                    script.setGraphicsVisible(false);
-                }
-            }
-        }
-
-        let mgLayer = this.node.getChildByName("moregameTag");
-        if(mgLayer){
-            mgLayer.active = true;
-            anim(mgLayer);
-            this.btn_moregame_menu.opening = true;
-            return;
-        }
-
-        cc.loader.loadRes("prefabs/moreGame", function(err, prefab){
-            if(!_this.node.getChildByName("moregameTag")){
-                let layer = cc.instantiate(prefab);
-                _this.node.addChild(layer);
-                layer.x = -490;
-                layer.name = "moregameTag";
-                layer.zIndex = 1000;
-                _this.btn_moregame_menu.node.zIndex = 1001;
-
-                anim(layer);
-                _this.btn_moregame_menu.opening = true;
-                let spr_red = _this.btn_moregame_menu.node.getChildByName("spr_red");
-                if(spr_red){
-                    spr_red.active = false;
-                }
-            }
-            
-        });
-    },
 
 });
