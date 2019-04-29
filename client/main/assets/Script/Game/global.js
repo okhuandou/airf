@@ -7,8 +7,8 @@ window.D = {
     commonConfigs:{},//public config
     configsDir: "config/",
     SceneManagerValues: {}, //public final var
-    UrlDomain: "https://www.gameairf.xyz/airf-api/",
-    // UrlDomain: "http://ls.otctop.com/toujiao-websocket/",
+    // UrlDomain: "https://www.gameairf.xyz/airf-api/",
+    UrlDomain: "http://ls.otctop.com/toujiao-websocket/",
     // UrlDomain: "http://192.168.1.110:8080/",//"http://192.168.1.55:8080/",
     // UrlDomain: "http://192.168.1.55:8080/",
     wxVideoAdUnitId: {'shengji':'adunit-e845eda53d6ecc10', 'fuhuo': 'adunit-3d11a8a5972b3cff', 'zanting':'adunit-cfe2c267872621cb', 
