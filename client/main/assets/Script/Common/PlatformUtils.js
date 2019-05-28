@@ -91,6 +91,7 @@ var platformUtils = {
             //     }
             // });
         }
+    // } else if (cc.sys.OS_ANDROID == cc.sys.os) {
         else {
             let skey = this.getUserSkey();
             if(skey) {
@@ -100,7 +101,8 @@ var platformUtils = {
                 callback(true);
             }
             else {
-                let code = common.guid();
+                let code = cc.sys.os+"_"+common.guid();
+                console.log("用户code：s"+code);
                 this.requestLogin(code, callback);
             }
         }
@@ -109,6 +111,7 @@ var platformUtils = {
         let _this = this;
         let pf = '';
         let model = '';
+        let osType = cc.sys.os;
         if(CC_WECHATGAME) {
             let name = null;
             let img = null;
@@ -138,7 +141,7 @@ var platformUtils = {
             });
         }
         else {
-            httpUtils.post(D.UrlDomain+'/test/login', {Version:D.Versioin}, {code: code, name:'', img:''}, function(res) {
+            httpUtils.post(D.UrlDomain+'/test/login', {Version:D.Versioin}, {osType:osType,code: code, name:'', img:''}, function(res) {
                 console.log('test登录返回：', JSON.stringify(res));
                 if(res !== -1 && res.code == 0) {
                     _this.setItemByLocalStorage('skey', res.data.skey);
@@ -321,7 +324,7 @@ var platformUtils = {
     },
     //视频广告
     createRewardedVideoAd: function(key, successCallback, target) {
-        if(false &&　CC_WECHATGAME) {
+        if(CC_WECHATGAME && D.weixinSDK) {
             let sysInfo = wx.getSystemInfoSync();
             let sdkVersion = sysInfo.SDKVersion;
             if (sdkVersion >= "2.0.4") {
@@ -349,6 +352,12 @@ var platformUtils = {
                     rewardedVideoAd = null;
                 });
             }
+
+        } else if (cc.sys.OS_ANDROID == cc.sys.os) {
+                // jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "showAlertDialog", "(Ljava/lang/String;Ljava/lang/String;)V", "title", "hahahahha");
+                jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "jlsp", "(Ljava/lang/String;Ljava/lang/String;)V", "title", "hahahahha");
+                // jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "banner", "(Ljava/lang/String;Ljava/lang/String;)V", "title", "hahahahha");
+                successCallback();
         }else{
             successCallback(-1);
         }
@@ -371,10 +380,10 @@ var platformUtils = {
     },
     //banner广告
     createBannerAd: function(special) {
-        return;
+        // return;
         if(common.popLayerNum > 0 && !special) return;
         
-        if(CC_WECHATGAME) {
+        if(CC_WECHATGAME && D.weixinSDK) {
             let sysInfo = wx.getSystemInfoSync();
             let sdkVersion = sysInfo.SDKVersion;
             if (sdkVersion >= "2.0.4") {
@@ -408,6 +417,10 @@ var platformUtils = {
                 bannerAd.show();
                 D.commonState.wxBannerAd = bannerAd;
             }
+        }else if (cc.sys.OS_ANDROID == cc.sys.os) {
+            // jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "showAlertDialog", "(Ljava/lang/String;Ljava/lang/String;)V", "title", "hahahahha");
+            // jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "jlsp", "(Ljava/lang/String;Ljava/lang/String;)V", "title", "hahahahha");
+            jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "banner", "(Ljava/lang/String;Ljava/lang/String;)V", "title", "hahahahha");
         }
     },
     //游戏圈
@@ -831,6 +844,7 @@ var platformUtils = {
         })
     },
     requestBill: function(card,slot,act,ext1,ext2,ext3,ext4,ext5) {
+        return;
         httpUtils.post(D.UrlDomain+'bill/v2',{Authorization: this.getUserSkey(), Version:D.Versioin},{
             card: card,
             slot: slot,

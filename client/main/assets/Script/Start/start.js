@@ -240,6 +240,11 @@ cc.Class({
             //广告
             platformUtils.createBannerAd();
             // platformUtils.gameClub();
+        }else if (cc.sys.OS_ANDROID == cc.sys.os) {
+            // jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "showAlertDialog", "(Ljava/lang/String;Ljava/lang/String;)V", "title", "hahahahha");
+            // jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "jlsp", "(Ljava/lang/String;Ljava/lang/String;)V", "title", "hahahahha");
+            jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "banner", "(Ljava/lang/String;Ljava/lang/String;)V", "title", "hahahahha");
+       
         }
         //助力礼包红点
         if(D.commonState.shareFriendNum >= 6){

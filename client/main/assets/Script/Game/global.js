@@ -6,9 +6,10 @@ window.D = {
     commonState: {}, //public final var
     commonConfigs:{},//public config
     configsDir: "config/",
+    weixinSDK:false,
     SceneManagerValues: {}, //public final var
-    // UrlDomain: "https://www.gameairf.xyz/airf-api/",
-    UrlDomain: "http://ls.otctop.com/toujiao-websocket/",
+    UrlDomain: "https://www.gameairf.xyz/airf-api/",
+    // UrlDomain: "http://ls.otctop.com/toujiao-websocket/",
     // UrlDomain: "http://192.168.1.110:8080/",//"http://192.168.1.55:8080/",
     // UrlDomain: "http://192.168.1.55:8080/",
     wxVideoAdUnitId: {'shengji':'adunit-e845eda53d6ecc10', 'fuhuo': 'adunit-3d11a8a5972b3cff', 'zanting':'adunit-cfe2c267872621cb', 
@@ -17,10 +18,8 @@ window.D = {
     wxAdUnitId: 'adunit-7c969c10b6eb1bed',//wechat广告ID
     wxLaunchOption:null,
     wxShareTicket: null,
-    wxMoreGameUrls:["https://aircraft-1255396242.cos.ap-guangzhou.myqcloud.com/moregame/nzpk.jpg","https://aircraft-1255396242.cos.ap-guangzhou.myqcloud.com/moregame/mg2.jpg",
-        "https://aircraft-1255396242.cos.ap-guangzhou.myqcloud.com/moregame/mg3.jpg","https://aircraft-1255396242.cos.ap-guangzhou.myqcloud.com/moregame/mg4.png",
-        "https://aircraft-1255396242.cos.ap-guangzhou.myqcloud.com/moregame/mg5.jpg","https://aircraft-1255396242.cos.ap-guangzhou.myqcloud.com/moregame/mg6.jpg"],
-    moreGameBaseUrl: "https://qcloud-cdn.budding-tech.com/moregame/",
+    wxMoreGameUrls:[],
+    moreGameBaseUrl: "",
     wxGameClubBtn: null,
     wxVideoMaxNum: 7,//微信视频最多次数
     wxAwardShareMaxNum: 10,//微信获得奖励分享最多次数
@@ -60,18 +59,7 @@ window.D = {
     lotteryVideoDrawCount: 3,//幸运抽奖每天视频次数
     isAutoPopedDailySign: false, //是否已强弹签到
 
-    wxMoreGamePath: {'wx71743e2c3394dc9e': '?krq_qmbk=015&ald_media_id=2677&ald_link_key=56b08fa11a4c2483&ald_position_id=0',
-        'wxd6c5337aed6300ec':'pages/index/index?shareType=helplock&ad_channel=6g&uid=162025&sid=10&ald_media_id=6590&ald_link_key=a20a68239e929800',
-        'wx52966cd958bcd65b':'pages/index/index?Ads=woying&AdsPos=feiji',
-        'wxa43c45d6986bcafd':'pages/index/index?channel=xiaoyouxi',
-        'wx5ced162faa4eb1f3':'pages/index/index?share_id=100019&ald_media_id=7753&ald_link_key=8bd4eda525a330a0',
-        'wx79fc05b190c49fde':'?ald_media_id=4400&ald_link_key=c7cd0c6aca3bb6bf&ald_position_id=0',
-        'wx3df1cf2a43a6b16d':'pages/index/index',
-        'wxe0e3ef455414d91d':'?ald_media_id=4560&ald_link_key=af65a1ccfb0475bd&ald_position_id=0',
-        'wxd8de2f6276406b2a':'pages/blank/blank?ald_media_id=8305&ald_link_key=b4e2b47d97b246f7',
-        'wx5d49b5fa52580889':'pages/index/index?ald_media_id=8138&ald_link_key=b68d0eadada2fb03',
-        'wxf48553c6ca9bc829':'pages/shop/index',
-        'wx7745ae49b819ab1b':'pages/index/index?source=&ald_media_id=10489&ald_link_key=dd8086b79675d327'
+    wxMoreGamePath: {
     },
 
 };

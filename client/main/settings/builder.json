@@ -14,9 +14,10 @@
     "orientation": "portrait",
     "subContext": ""
   },
-  "encryptJs": true,
+  "encryptJs": false,
   "excludeScenes": [],
   "fb-instant-games": {},
+  "includeAnySDK": false,
   "includeSDKBox": false,
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": true,
@@ -38,7 +39,7 @@
   "title": "aircraft",
   "webOrientation": "portrait",
   "wechatgame": {
-    "REMOTE_SERVER_ROOT": "https://www.gameairf.xyz/airf",
+    "REMOTE_SERVER_ROOT": "https://gameairf.xyz/airf",
     "appid": "wxda8feeb8d5dc480e",
     "isSubdomain": false,
     "orientation": "portrait",

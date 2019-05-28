@@ -532,9 +532,7 @@
       "__id__": 10
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "c70f1d5d-6ed1-46b4-ad45-2d55688fccda"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -560,9 +558,7 @@
       "__id__": 9
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "16e55ae5-ea1a-4199-b160-ee16d161fc66"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -641,9 +637,7 @@
       "b": 255,
       "a": 255
     },
-    "_N$normalSprite": {
-      "__uuid__": "16e55ae5-ea1a-4199-b160-ee16d161fc66"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": {
       "__uuid__": "16e55ae5-ea1a-4199-b160-ee16d161fc66"
     },
@@ -703,7 +697,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 400.14,
+      "width": 364,
       "height": 40
     },
     "_anchorPoint": {
@@ -746,8 +740,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_string": "正在解压资源1/2，解压不消耗流量",
-    "_N$string": "正在解压资源1/2，解压不消耗流量",
+    "_string": "正在解压资源，解压不消耗流量",
+    "_N$string": "正在解压资源，解压不消耗流量",
     "_fontSize": 26,
     "_lineHeight": 40,
     "_enableWrapText": true,

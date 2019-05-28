@@ -539,7 +539,8 @@ cc.Class({
         var _this = this;
         platformUtils.requestHeroUpgrade(this.currHeroKind, 2, function(res) {
             if(res == 2010){
-                common.showPopUpLayer(_this.upgradeFail);
+                // common.showPopUpLayer(_this.upgradeFail);
+                common.sysMessage("金币不足", null,cc.v2(0, 100))
                 return;
             }
             let hero = res.hero;

@@ -113,6 +113,7 @@ cc.Class({
     },
     //提交数据
     submitUserData: function(data) {
+        return；
         let highestScore = data.highestScore;
         let score = data.score;
         let dist = data.dist;
@@ -145,11 +146,11 @@ cc.Class({
                         else flagClassicScore = true;
                     }
                     else if(KVData.key == 'dist') {
-                        if(parseFloat(KVData.value) < parseFloat(dist)) {
-                            console.log('KVData.value < score ' + KVData.value + "," + score);
+                        // if(parseFloat(KVData.value) < parseFloat(dist)) {
+                            // console.log('KVData.value < score ' + KVData.value + "," + score);
                             flagDist = false;
-                        }
-                        else flagDist = true;
+                        // }
+                        // else flagDist = true;
                     }
                 });
                 if( ! flagScore) _this.doSubmitUserScoreData(data);
