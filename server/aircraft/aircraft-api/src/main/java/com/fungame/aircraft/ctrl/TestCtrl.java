@@ -49,7 +49,7 @@ public class TestCtrl {
 		logger.info("Ctrl current thread id {}", Thread.currentThread().getId());
 		
 		String openid = reqBody.getCode();
-		LoginDTO dto = this.userService.updateAndLogin(openid, "", "", "", "test", "test", "", reqBody.getFromUserId(),"");
+		LoginDTO dto = this.userService.updateAndLogin(reqBody.getOsType(),openid, "", "", "", "test", "test", "", reqBody.getFromUserId(),"");
 
 		logger.info("current user {}", dto.toString());
 

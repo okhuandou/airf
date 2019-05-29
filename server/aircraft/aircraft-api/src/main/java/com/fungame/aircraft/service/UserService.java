@@ -42,13 +42,13 @@ public class UserService {
 	@Autowired
 	RedpackCfgDao redpackCfgDao;
 	
-    public LoginDTO updateAndLoginWX(String code,String name, String img, String pf, 
+    public LoginDTO updateAndLoginWX(String osType,String code,String name, String img, String pf, 
     		String model, String fromAppId, int fromUserId, String fromType) throws Exception {
     	WechatAuthCodeDTO rsp = this.wechatApi.getWxSession(code);
-    	return this.updateAndLogin(rsp.getOpenid(), name, img, rsp.getSessionKey(), pf, model, fromAppId, fromUserId, fromType);
+    	return this.updateAndLogin(osType,rsp.getOpenid(), name, img, rsp.getSessionKey(), pf, model, fromAppId, fromUserId, fromType);
     }
     
-    public LoginDTO updateAndLogin(String openid,String name, String img, String sessionKey,
+    public LoginDTO updateAndLogin(String osType,String openid,String name, String img, String sessionKey,
     		String pf, String model, String fromAppId, int fromUserId, String fromType) throws Exception {
     	UserBase userBase = this.userBaseDao.select(openid);
     	int userID = userBase != null ? userBase.getId(): 0;
@@ -59,10 +59,9 @@ public class UserService {
     		userBase.setCreatedAt(new Date());
     		userBase.setOpenid(openid);
     		userBase.setSessionKey(sessionKey);
-    		userBase.setUnionid("");
+    		userBase.setUnionid(osType);
     		userBase.setName(name);
     		userBase.setImg(img);
-    		
     		this.userBaseDao.insert(userBase);
     		userID = userBase.getId();
     		BillLogger.user(userID, openid, pf, model, fromAppId);

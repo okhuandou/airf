@@ -53,7 +53,7 @@ public class UserCtrl {
     		@RequestBody LoginReqVO reqBody,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String code = reqBody.getCode();
-		LoginDTO dto = this.userService.updateAndLoginWX(code,reqBody.getName(),
+		LoginDTO dto = this.userService.updateAndLoginWX(reqBody.getOsType(),code,reqBody.getName(),
 				reqBody.getImg(), reqBody.getPf(), reqBody.getModel(), 
 				reqBody.getFromAppId(), reqBody.getFromUserId(), reqBody.getFromType());
 		
