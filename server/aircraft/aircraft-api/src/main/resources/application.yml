@@ -1,6 +1,6 @@
 server:
-  port: 8620
-  context-path: /toujiao-websocket
+  port: 8700
+  context-path: /testArif
   tomcat:
     max-threads: 400  
     uri-encoding: UTF-8

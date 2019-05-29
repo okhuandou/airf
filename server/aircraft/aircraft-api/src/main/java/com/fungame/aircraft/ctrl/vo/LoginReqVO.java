@@ -9,6 +9,20 @@ public class LoginReqVO {
 	private String fromAppId;
 	private int fromUserId;
 	private String fromType;
+	private String osType;
+	
+	
+	public String getOsType() {
+		if(osType==null){
+			return "wx";
+		}
+		return osType;
+	}
+
+	public void setOsType(String osType) {
+		this.osType = osType;
+	}
+
 	public LoginReqVO() {
 	}
 

@@ -1,5 +1,8 @@
 package com.fungame.aircraft.ctrl;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +23,6 @@ import com.fungame.core.web.ResponseResult;
 import com.fungame.utils.IpHelper;
 import com.fungame.utils.mapper.BeanMapper;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiResponse;
-
 @RestController
 @RequestMapping(value="/cfgs")
 @Api(tags = "cfgs", description="cfgs")
@@ -31,22 +31,27 @@ public class CfgCtrl {
 	FuncLockService funcLockService;
 	@Autowired
 	DictCfgDao dictCfgDao;
+	
+	public static ResponseResult result= null;
 
 	@RequestMapping(value="", method=RequestMethod.GET)
 	@ApiResponse(response=CfgVO.class, code = 0, message = "")
     public ResponseResult cfgs(
     		@RequestParam(value="ver", name="ver", required=false)String ver,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String ip = IpHelper.getIpAddr(request);
-		List<ShareLockFunc> funcs = this.funcLockService.getShareCfgs(ip, ver);
-		List<ShareLockFuncVO> shares = BeanMapper.mapList(funcs, ShareLockFuncVO.class);
-		CfgVO vo = new CfgVO();
-		vo.setShares(shares);
-		vo.setNav(dictCfgDao.listValue("navOther", "[]", String.class));
-		vo.setUrls(dictCfgDao.listValue("moreGamesUrls", "[]", String.class));
-		vo.setNav2(dictCfgDao.listValue("navOther2", "[]", String.class));
-		vo.setNavName(dictCfgDao.listValue("navName", "[]", String.class));
-		vo.setCgnav(dictCfgDao.listValue("cgnav", "[]", String.class));
-		return new ResponseResult(vo);
+		if(result==null){
+			String ip = IpHelper.getIpAddr(request);
+			List<ShareLockFunc> funcs = this.funcLockService.getShareCfgs(ip, ver);
+			List<ShareLockFuncVO> shares = BeanMapper.mapList(funcs, ShareLockFuncVO.class);
+			CfgVO vo = new CfgVO();
+			vo.setShares(shares);
+			vo.setNav(dictCfgDao.listValue("navOther", "[]", String.class));
+			vo.setUrls(dictCfgDao.listValue("moreGamesUrls", "[]", String.class));
+			vo.setNav2(dictCfgDao.listValue("navOther2", "[]", String.class));
+			vo.setNavName(dictCfgDao.listValue("navName", "[]", String.class));
+			vo.setCgnav(dictCfgDao.listValue("cgnav", "[]", String.class));
+			result = new ResponseResult(vo);
+		}
+		return result;
 	}
 }

@@ -4,8 +4,8 @@
 	<Property name="LOG_HOME" value="/home/otctopchannel/airf/logs/aircraft/" />
 	<Property name="BILL_HOME" value="/home/otctopchannel/airf/bill/aircraft/" /> -->
  
-	<Property name="LOG_HOME" value="/data/logs/aircraft/logs/aircraft/" />
-	<Property name="BILL_HOME" value="/data/logs/aircraft/bill/aircraft/" />
+	<Property name="LOG_HOME" value="logs/" />
+	<Property name="BILL_HOME" value="logs/bill/" />
     <property name="FILE_NAME" value="game" />
     
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
