@@ -24,7 +24,7 @@
 		<joda-time.version>2.9.1</joda-time.version>
 		<guava.version>19.0</guava.version>
 		<commons-lang3.version>3.4</commons-lang3.version>
-		<fastjson.version>1.2.9</fastjson.version>
+		<fastjson.version>1.2.83</fastjson.version>
 	</properties>
 	<dependencies>
 		<dependency>
